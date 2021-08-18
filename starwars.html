@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>STAR WARS</title>
+    <link rel="stylesheet" href="starwars.css" />
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      data-auto-replace-svg="nest"
+    ></script>
+  </head>
+  <style>
+    #starwar {
+      color: white;
+      border-bottom: 20px;
+    }
+    .search_box #starwar {
+      width: 100%;
+    }
+  </style>
+  <body>
+    <canvas id="canva"></canvas>
+
+    <div class="app">
+      <div class="search_box">
+        <div class="logo">
+          <img
+            src="starwarslogo.png"
+            id="starwarsImg"
+            alt="Star Wars Logo"
+            style="background-color: transparent"
+          />
+        </div>
+        <div class="search_searchBox">
+          <div class="search_input">
+            <input
+              oninput="throttleFun()"
+              type="text"
+              placeholder="Search any Character"
+              id="query"
+            />
+
+            <div>
+              <img
+                src="searchicon.svg"
+                alt="search"
+                width="17px"
+                style="
+                  background-color: rgb(255, 235, 0);
+                  padding: 10px;
+                  border-radius: 100%;
+                "
+              />
+            </div>
+          </div>
+          <div id="starwar"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  var starwars_div = document.getElementById("starwar");
+
+  var timerId;
+
+  function throttleFun() {
+    if (timerId) {
+      return false;
+    }
+
+    timerId = setTimeout(() => {
+      main();
+      timerId = undefined;
+    }, 500);
+  }
+
+  async function searchData() {
+    let query = document.getElementById("query").value;
+
+    if (query.length <= 2) {
+      return false;
+    }
+
+    let res = await fetch(`https://swapi.dev/api/people/?search=${query}`);
+    let data = await res.json();
+
+    return data.results;
+  }
+
+  function appendMovies(results) {
+    starwars_div.innerHTML = null;
+    results.forEach(({ name, birth_year }) => {
+      let p = document.createElement("p");
+      p.setAttribute("id", "charName");
+      let year = document.createElement("p");
+      year.setAttribute("id", "yob");
+
+      p.innerText = name;
+      year.innerText = birth_year;
+
+      starwars_div.append(p, year);
+    });
+  }
+
+  async function main() {
+    let movies = await searchData();
+
+    appendMovies(movies);
+  }
+</script>
+<script src="starwars.js"></script>

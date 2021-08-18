@@ -1,0 +1,89 @@
+
+.title {
+  font-family: sans-serif;
+  font-size: 24px;
+  color: #eed6fe;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1000;
+}
+
+#charName {
+    color: yellow;
+    padding-left: 15px;
+    font-size: larger;
+    margin-bottom: 0%;
+    font-family: sans-serif;
+}
+
+#yob {
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.692);
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+#charName:hover {
+    cursor: pointer;
+}
+#canva {
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1000;
+}
+
+.logo{
+    text-align: center;
+    margin-bottom: 2%;
+}
+.logo img{
+    width: 200px;
+}
+.search_box{
+    width: 100%;
+    display: flex;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+}
+.search_searchBox{
+    width: 40%;
+    border-radius: 20px;
+    font-size: 16px;
+    background: #2d2f30;
+    color: #f2f2f2;
+}
+.search_searchBox *{
+    background: #2d2f30;
+}
+.app{
+    margin-top: 15%;
+}
+.search_input{
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+    background: #2d2f30;
+    color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search_input>input{
+    border: 0;
+    padding: 0 15px;
+    outline: 0;
+    color: #f2f2f2;
+    font-size: 16px;
+    height: 30px;
+    width:75%;
+    margin: 0;
+    
+}
+
+
+
