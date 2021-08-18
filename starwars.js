@@ -1,3 +1,56 @@
+var starwars_div = document.getElementById("starwar");
+
+var timerId;
+
+function throttleFun() {
+  if (timerId) {
+    return false;
+  }
+
+  timerId = setTimeout(() => {
+    main();
+    timerId = undefined;
+  }, 500);
+}
+
+async function searchData() {
+  let query = document.getElementById("query").value;
+
+  if (query.length <= 2) {
+    return false;
+  }
+
+  let res = await fetch(`https://swapi.dev/api/people/?search=${query}`);
+  let data = await res.json();
+
+  return data.results;
+}
+
+function appendData(results) {
+  starwars_div.innerHTML = null;
+  results.forEach(({ name, birth_year }) => {
+    let p = document.createElement("p");
+    p.setAttribute("id", "charName");
+    let year = document.createElement("p");
+    year.setAttribute("id", "yob");
+
+    p.innerText = name;
+    year.innerText = birth_year;
+
+    starwars_div.append(p, year);
+  });
+}
+
+async function main() {
+  let movies = await searchData();
+
+  appendData(movies);
+}
+
+//--------------------------------------------//
+
+
+
 var canva = document.getElementById("canva");
 var bgFancy = canva.getContext("2d");
 
